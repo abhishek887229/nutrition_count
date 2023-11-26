@@ -24,3 +24,13 @@ def index(request):
     consumed_food_by_user = Consumed.objects.filter(user=request.user)
 
     return render(request, 'myapp/index.html', {'food': data, 'consumed_food': consumed_food_by_user})
+
+def delete(request,id):
+    data=Consumed.objects.filter(id=id)
+    
+    if data:
+        data.delete()
+        return redirect('main:index')
+    
+
+    return render(request,'myapp/index.html')
