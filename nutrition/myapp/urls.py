@@ -7,5 +7,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.index,name="index"),
     path('<int:id>/',views.delete,name="del"),
+    path("save/",views.insert, name="insert"),
 ]
 

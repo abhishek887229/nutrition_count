@@ -34,3 +34,16 @@ def delete(request,id):
     
 
     return render(request,'myapp/index.html')
+
+def insert(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        carbs = request.POST.get("carbs")
+        fats = request.POST.get("fats")
+        protien = request.POST.get("protien")
+        calories = request.POST.get("calories")
+
+        x =food(name=name, carbs=carbs, protien=protien, fat=fats, calories=calories)
+        x.save()
+
+    return redirect('main:index')
