@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .models import food, Consumed
+from .models import food, Consumed,goal
+from django.http import JsonResponse
 
 @login_required
 def index(request):
@@ -47,3 +48,24 @@ def insert(request):
         x.save()
 
     return redirect('main:index')
+
+
+def SetGoal(request):
+    if request.method=="POST":
+        user = request.user
+        calories = request.POST.get("setgoal")
+
+        # Assuming you have a Goal model with fields user, date, and daily_goal
+        goal_instance = goal(user=user, date="", daily_goal=calories)
+        goal_instance.save()
+
+        # Send JSON response with the goal data
+        response_data = {
+            'success': True,
+            'calories': calories,
+        }
+
+        return redirect('main:index')
+
+
+

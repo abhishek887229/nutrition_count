@@ -22,3 +22,12 @@ class Consumed(models.Model):
         x=str(self.consumed)
         return x
 
+class goal(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    date=models.DateField(auto_now_add=True)
+    daily_goal=models.IntegerField()
+
+    def __str__(self):
+        y=str(self.user)+"|"+str(self.date)+"|"+str(self.daily_goal)
+        return y
+
