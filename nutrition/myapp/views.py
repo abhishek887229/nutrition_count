@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import food, Consumed,goal
 from django.http import JsonResponse
+from .forms import User_Register
 
 @login_required
 def index(request):
@@ -69,3 +70,13 @@ def SetGoal(request):
 
 
 
+def Registration(request):
+    if request.method=="POST":
+        user_form=User_Register(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('main:index')
+    else:
+        user_form=User_Register()
+    
+    return render(request,'myapp/register.html',{'form':user_form})
